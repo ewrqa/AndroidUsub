@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.1"
+    defaultConfig {
+        applicationId "com.lgh.test"
+        minSdkVersion 18
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+dependencies {
+    implementation files('libs\\ZtlApi.jar')
+    dependencies { implementation fileTree(dir: 'libs', include: ['*.jar']) }
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:27.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation project(':uvccamerasdk')
+    implementation 'com.bulong.rudeness:rudeness:latest.release@aar'
+    implementation 'io.github.xmaihh:serialport:2.1.1'
+    implementation 'com.github.licheedev:Android-SerialPort-API:2.0.0'
+    //rx
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+}
